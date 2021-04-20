@@ -51,7 +51,8 @@ class Game {
  }
 
 /** This is a description of the foo function. */
- handleInteraction() {
+ handleInteraction(e) {
+    console.log('Keyboard interaction', e.target.innerHTML);
 
  }
 

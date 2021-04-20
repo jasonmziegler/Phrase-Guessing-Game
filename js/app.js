@@ -18,5 +18,8 @@
 const game = new Game();
 
 const startButton = document.getElementById('btn__reset');
+const keyboard = document.getElementById('qwerty');
 
 startButton.addEventListener('click', game.startGame);
+keyboard.addEventListener('click', game.handleInteraction);
+
