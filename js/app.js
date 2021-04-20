@@ -9,13 +9,14 @@
 // q
 // Letter 
 // 
+// methods
+// 
+// 
 
 // TODO: Hide Overlay document.getElementById('overlay').style.display = 'none';
 
 const game = new Game();
 
 const startButton = document.getElementById('btn__reset');
-const overlay = document.getElementById('overlay')
-startButton.addEventListener('click', (e) => {
-    overlay.style.display = 'none';
-});
+
+startButton.addEventListener('click', game.startGame);
