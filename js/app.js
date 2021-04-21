@@ -15,11 +15,15 @@
 
 // TODO: Hide Overlay document.getElementById('overlay').style.display = 'none';
 
-const game = new Game();
+
 
 const startButton = document.getElementById('btn__reset');
 const keyboard = document.getElementById('qwerty');
 
-startButton.addEventListener('click', game.startGame);
+startButton.addEventListener('click', (e) => {
+    const game = new Game();
+    game.startGame();
+
+});
 keyboard.addEventListener('click', game.handleInteraction);
 

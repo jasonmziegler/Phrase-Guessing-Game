@@ -39,7 +39,8 @@ class Game {
  }
 /** This initializes game. */
  startGame() {
-    const overlay = document.getElementById('overlay')
+     console.log(this);
+    const overlay = document.getElementById('overlay');
     overlay.style.display = 'none';
     this.activePhrase = this.getRandomPhrase();
     this.activePhrase.addPhraseToDisplay();
