@@ -70,6 +70,7 @@ class Phrase {
         game.activePhrase.showMatchedLetter(letter);
     } else {
         letterButton.classList.add('wrong');
+        game.removeLife();
     }
     // <button class="wrong key">q</button>
     // <button class="chosen key">w</button>
@@ -88,6 +89,8 @@ class Phrase {
             phrase[i].classList.remove('hide');
         }
     }
+
+    game.checkForWin();
     
     // if the il class contains letter class then remove hide and add show to the il
  }

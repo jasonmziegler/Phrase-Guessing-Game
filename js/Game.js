@@ -71,10 +71,10 @@ class Game {
 
  /** This will remove a life from the player on screen. */
 removeLife() {
-
+    console.log('A life has been lost');
 }
 
-/** This end the game and allow the game to be replayed. 
+/** This ends the game and allow the game to be replayed. 
  * After a game is completed, the gameboard is reset so that clicking the "Start Game" button loads a new game
  * 
 */
