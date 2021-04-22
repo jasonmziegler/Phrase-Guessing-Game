@@ -22,8 +22,9 @@ const keyboard = document.getElementById('qwerty');
 
 startButton.addEventListener('click', (e) => {
     const game = new Game();
+    keyboard.addEventListener('click', game.handleInteraction);
     game.startGame();
 
 });
-keyboard.addEventListener('click', game.handleInteraction);
+
 

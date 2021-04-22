@@ -42,6 +42,7 @@ class Game {
      console.log(this);
     const overlay = document.getElementById('overlay');
     overlay.style.display = 'none';
+    document.getElementById('phrase').innerHTML = '';
     this.activePhrase = this.getRandomPhrase();
     this.activePhrase.addPhraseToDisplay();
 
