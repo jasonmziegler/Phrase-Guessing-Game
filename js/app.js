@@ -19,11 +19,11 @@
 
 const startButton = document.getElementById('btn__reset');
 const keyboard = document.getElementById('qwerty');
-
+const game = new Game();
 startButton.addEventListener('click', (e) => {
-    const game = new Game();
-    keyboard.addEventListener('click', game.handleInteraction);
+    
     game.startGame();
+    keyboard.addEventListener('click', game.handleInteraction);
 
 });
 

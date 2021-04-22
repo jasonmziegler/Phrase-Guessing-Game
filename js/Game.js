@@ -39,7 +39,7 @@ class Game {
  }
 /** This initializes game. */
  startGame() {
-     console.log(this);
+    console.log(this);
     const overlay = document.getElementById('overlay');
     overlay.style.display = 'none';
     document.getElementById('phrase').innerHTML = '';
@@ -54,7 +54,13 @@ class Game {
 
 /** This is a description of the foo function. */
  handleInteraction(e) {
-    console.log('Keyboard interaction', e.target.innerHTML);
+     //console.log('This =', this); // this is the html e
+     
+     if (e.target.matches('button') && !e.target.classList.contains('chosen')) {
+        console.log('Keyboard interaction', e.target.innerHTML);
+        game.activePhrase.checkLetter(e.target);
+     }
+    
 
  }
 
