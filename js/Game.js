@@ -30,78 +30,97 @@ reduce lives
 */
 
 class Game {
- constructor() {
-    this.missed = 0; 
-    this.phrases = ['I love you', 'Eat my shorts', 'Hang loose', 'Cowabunga Dude', 'Fear not'];
-    this.activePhrase = '';
-     
-     
- }
-/** This initializes game. */
- startGame() {
-    console.log(this);
-    const overlay = document.getElementById('overlay');
-    overlay.style.display = 'none';
-    document.getElementById('phrase').innerHTML = '';
-    this.activePhrase = this.getRandomPhrase();
-    this.activePhrase.addPhraseToDisplay();
+    constructor() {
+        this.missed = 0; 
+        this.phrases = ['I love you', 'Eat my shorts', 'Hang loose', 'Cowabunga Dude', 'Fear not'];
+        this.activePhrase = '';
+    }
 
- }
-/** This will select a random phrase from the phrases */
- getRandomPhrase() {
-    return new Phrase(this.phrases[Math.floor(Math.random() * this.phrases.length)]);
- }
+    /** This initializes game. */
+    startGame() {
+        console.log(this);
+        const overlay = document.getElementById('overlay');
+        overlay.style.display = 'none';
+        document.getElementById('phrase').innerHTML = '';
+        this.activePhrase = this.getRandomPhrase();
+        this.activePhrase.addPhraseToDisplay();
+        // TODO: Reset Lives
+        // TODO: Reset Keyboard
 
-/** This is a description of the foo function. */
- handleInteraction(e) {
-     //console.log('This =', this); // this is the html e
-     
-     if (e.target.matches('button') && !e.target.classList.contains('chosen')) {
-        console.log('Keyboard interaction', e.target.innerHTML);
-        game.activePhrase.checkLetter(e.target);
-     }
-    
+    }
+    /** This will select a random phrase from the phrases */
+    getRandomPhrase() {
+        return new Phrase(this.phrases[Math.floor(Math.random() * this.phrases.length)]);
+    }
 
- }
+    /** This is a description of the foo function. */
+    handleInteraction(e) {
+        //console.log('This =', this); // this is the html e
+        
+        if (e.target.matches('button') && !e.target.classList.contains('chosen')) {
+            console.log('Keyboard interaction', e.target.innerHTML);
+            game.activePhrase.checkLetter(e.target);
+        }
+        
 
- /** This will check if all of the letters have been revealed. */
- checkForWin() {
-     console.log('Check for win!');
-     // plan to use the same process for display letter to loop over the letters and see if all contain show class
-     let phrase = document.getElementById('phrase').firstChild.getElementsByTagName('li');
-     let win = true;
-     for (let i = 0; i < this.activePhrase.phrase.length; i++) {
-        if (phrase[i].classList.contains('hide')) {
-            return false;
+    }
+
+    /** This will check if all of the letters have been revealed. */
+    checkForWin() {
+        console.log('Check for win!');
+        // plan to use the same process for display letter to loop over the letters and see if all contain show class
+        let phrase = document.getElementById('phrase').firstChild.getElementsByTagName('li');
+        let win = true;
+        for (let i = 0; i < this.activePhrase.phrase.length; i++) {
+            if (phrase[i].classList.contains('hide')) {
+                return false;
+            }
+        }
+        return true;
+
+    }
+
+    /** This will remove a life from the player on screen. */
+    removeLife() {
+        console.log('A life has been lost');
+        game.missed += 1;
+        
+        let scoreboard = document.getElementById('scoreboard').firstElementChild;
+        let lives = scoreboard.getElementsByTagName('li');
+        // TODO: Need to replace liveHeart.PNG with lostHeart.PNG 
+        lives[5-game.missed].firstElementChild.src = 'images/lostHeart.png';
+        
+
+
+
+        if(game.missed >= 5) {
+            game.gameOver('lose');
         }
     }
-    return true;
 
- }
+    /** This ends the game and allow the game to be replayed. 
+     * After a game is completed, the gameboard is reset so that clicking the "Start Game" button loads a new game
+     * 
+    */
+    gameOver(message) {
+        //console.log('game over!', message);
+        const overlay = document.getElementById('overlay');
+        const gameOverMessage = document.getElementById('game-over-message');
+        overlay.style.display = 'block';
+        if (message === 'win') {
+            if (overlay.classList.contains('lose')) {
+                overlay.classList.remove('lose');
+            } 
+            overlay.classList.add('win');
+            gameOverMessage.innerText = "Congratulations, you win! Click start to try again.";
 
- /** This will remove a life from the player on screen. */
-removeLife() {
-    console.log('A life has been lost');
-    game.missed += 1;
-    
-    let scoreboard = document.getElementById('scoreboard');
-    scoreboard.firstElementChild.lastChild.remove();
-    scoreboard.firstElementChild.lastChild.remove();
-    if(game.missed >= 5) {
-        game.gameOver('You lose! Click start to try again.');
+        } else {
+            if (overlay.classList.contains('win')) {
+                overlay.classList.remove('win');
+            } 
+            overlay.classList.add('lose');
+            gameOverMessage.innerText = "Doh! You lose! Click start to try again.";
+        }
+        
     }
-}
-
-/** This ends the game and allow the game to be replayed. 
- * After a game is completed, the gameboard is reset so that clicking the "Start Game" button loads a new game
- * 
-*/
-gameOver(message) {
-    console.log('game over!', message);
-
-}
-
-
-
-
 }

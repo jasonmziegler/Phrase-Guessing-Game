@@ -69,7 +69,7 @@ class Phrase {
         letterButton.classList.add('chosen');
         game.activePhrase.showMatchedLetter(letter);
         if (game.checkForWin()) {
-            game.gameOver('You Win');
+            game.gameOver('win');
         }
     } else {
         letterButton.classList.add('wrong');
