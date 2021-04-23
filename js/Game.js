@@ -2,33 +2,6 @@
  * Project 4 - OOP Game App
  * Game.js */
 
-
-/* 
-Game class planning
-
-Properties:
-
-phrase
-picks
-lives
-
-Methods:
-
-get phrase 
-set phrase
-
-display phrase 
- show
- hide
-
-select letter
--- classes for letters chosen / wrong
-
-
-reduce lives
-
-*/
-
 class Game {
     constructor() {
         this.missed = 0; 
@@ -38,23 +11,23 @@ class Game {
 
     /** This initializes game. */
     startGame() {
-        console.log(this);
+        //console.log(this);
         const overlay = document.getElementById('overlay');
         overlay.style.display = 'none';
         document.getElementById('phrase').innerHTML = '';
         this.activePhrase = this.getRandomPhrase();
         this.activePhrase.addPhraseToDisplay();
-        // TODO: Reset Lives
+        // Reset Lives
         this.missed = 0;
         let scoreboard = document.getElementById('scoreboard').firstElementChild;
         let lives = scoreboard.getElementsByTagName('li');
         for (let i = 0; i < lives.length; i++) {
             lives[i].firstElementChild.src = 'images/liveHeart.png';    
         }
-        // TODO: Reset Keyboard
+        // Reset Keyboard
         const keyboard = document.getElementById('qwerty');
         const rows = keyboard.getElementsByTagName('div');
-        console.log(rows);
+        //console.log(rows);
         for (let i = 0; i < rows.length; i++) {
             let keys = rows[i].getElementsByTagName('button');
             for (let j = 0; j < keys.length; j++) {
@@ -67,6 +40,7 @@ class Game {
             }
         }
     }
+
     /** This will select a random phrase from the phrases */
     getRandomPhrase() {
         return new Phrase(this.phrases[Math.floor(Math.random() * this.phrases.length)]);
@@ -77,7 +51,7 @@ class Game {
         //console.log('This =', this); // this is the html e
         
         if (e.target.matches('button') && !e.target.classList.contains('chosen') && !e.target.classList.contains('wrong') ) {
-            console.log('Keyboard interaction', e.target.innerHTML);
+            //console.log('Keyboard interaction', e.target.innerHTML);
             game.activePhrase.checkLetter(e.target);
         }
         
@@ -86,10 +60,10 @@ class Game {
 
     /** This will check if all of the letters have been revealed. */
     checkForWin() {
-        console.log('Check for win!');
+        //console.log('Check for win!');
         // plan to use the same process for display letter to loop over the letters and see if all contain show class
         let phrase = document.getElementById('phrase').firstChild.getElementsByTagName('li');
-        let win = true;
+        //let win = true;
         for (let i = 0; i < this.activePhrase.phrase.length; i++) {
             if (phrase[i].classList.contains('hide')) {
                 return false;
@@ -101,7 +75,7 @@ class Game {
 
     /** This will remove a life from the player on screen. */
     removeLife() {
-        console.log('A life has been lost');
+        //console.log('A life has been lost');
         game.missed += 1;
         
         let scoreboard = document.getElementById('scoreboard').firstElementChild;
@@ -135,7 +109,6 @@ class Game {
             } 
             overlay.classList.add('lose');
             gameOverMessage.innerText = "Doh! You lose! Click start to try again.";
-        }
-        
+        }      
     }
 }

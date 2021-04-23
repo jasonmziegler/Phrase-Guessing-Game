@@ -4,19 +4,6 @@
 
 // Javascript Goes Here
 
-// Potential Classes
-// Board (Phrase)
-// q
-// Letter 
-// 
-// methods
-// 
-// 
-
-// TODO: Hide Overlay document.getElementById('overlay').style.display = 'none';
-
-
-
 const startButton = document.getElementById('btn__reset');
 const keyboard = document.getElementById('qwerty');
 const game = new Game();

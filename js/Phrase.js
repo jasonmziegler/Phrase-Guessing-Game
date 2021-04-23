@@ -2,28 +2,14 @@
  * Project 4 - OOP Game App
  * Phrase.js */
 
-/*
-
-Phrase Class Planning
-
-Properties
-phrase
-
-Methods
-letter
-
-*/
-
-
 class Phrase {
- constructor(phrase) {
-    
+ constructor(phrase) {   
     this.phrase = phrase.toLowerCase();
  }
 
  /** This add the phrase to the game board / display */
  addPhraseToDisplay() {
-    console.log('The phrase has been added to the display.')
+    //console.log('The phrase has been added to the display.')
     // <ul>
     //     <li class="hide letter h">h</li>
     //     <li class="hide letter o">o</li>
@@ -56,15 +42,14 @@ class Phrase {
         ul.appendChild(li);
     }
     document.getElementById('phrase').appendChild(ul);
-    
-
  }
+
  /** This will check if the clicked letter is in the phrase*/
  checkLetter(letterButton) {
-    console.log('The letter following letter has been checked: ', letterButton);
+    //console.log('The letter following letter has been checked: ', letterButton);
     let letter = letterButton.innerHTML;
-    console.log('Active Phrase', game.activePhrase);
-    console.log('Index of Letter Chosen', game.activePhrase.phrase.indexOf(letter))
+    //console.log('Active Phrase', game.activePhrase);
+    //console.log('Index of Letter Chosen', game.activePhrase.phrase.indexOf(letter))
     if (game.activePhrase.phrase.indexOf(letter) != -1) {
         letterButton.classList.add('chosen');
         game.activePhrase.showMatchedLetter(letter);
@@ -78,14 +63,13 @@ class Phrase {
     // <button class="wrong key">q</button>
     // <button class="chosen key">w</button>
     // <button class="key">e</button>
-
-
  }
+
 /** This will reveal the letter(s) on the board that matches the player's selection*/
  showMatchedLetter(letter) { 
-    console.log('The Matched Letter has been shown.', );
+    //console.log('The Matched Letter has been shown.', );
     let phrase = document.getElementById('phrase').firstChild.getElementsByTagName('li');
-    console.log('Phrase', phrase);
+    //console.log('Phrase', phrase);
     for (let i = 0; i < phrase.length;i++) {
         if (phrase[i].classList.contains(letter)) {
             phrase[i].classList.add('show');
