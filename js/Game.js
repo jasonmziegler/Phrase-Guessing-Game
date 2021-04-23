@@ -66,6 +66,16 @@ class Game {
 
  /** This will check if all of the letters have been revealed. */
  checkForWin() {
+     console.log('Check for win!');
+     // plan to use the same process for display letter to loop over the letters and see if all contain show class
+     let phrase = document.getElementById('phrase').firstChild.getElementsByTagName('li');
+     let win = true;
+     for (let i = 0; i < this.activePhrase.phrase.length; i++) {
+        if (phrase[i].classList.contains('hide')) {
+            return false;
+        }
+    }
+    return true;
 
  }
 
@@ -78,7 +88,8 @@ removeLife() {
  * After a game is completed, the gameboard is reset so that clicking the "Start Game" button loads a new game
  * 
 */
-gameOver() {
+gameOver(message) {
+    console.log('game over!', message);
 
 }
 
