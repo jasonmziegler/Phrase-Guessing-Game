@@ -6,7 +6,7 @@ class Game {
     constructor() {
         this.missed = 0; 
         this.phrases = ['I love you', 'Eat my shorts', 'Hang loose', 'Cowabunga Dude', 'Fear not'];
-        this.activePhrase = '';
+        this.activePhrase = null;
     }
 
     /** This initializes game. */
