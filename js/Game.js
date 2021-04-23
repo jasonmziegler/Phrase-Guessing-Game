@@ -45,8 +45,27 @@ class Game {
         this.activePhrase = this.getRandomPhrase();
         this.activePhrase.addPhraseToDisplay();
         // TODO: Reset Lives
+        this.missed = 0;
+        let scoreboard = document.getElementById('scoreboard').firstElementChild;
+        let lives = scoreboard.getElementsByTagName('li');
+        for (let i = 0; i < lives.length; i++) {
+            lives[i].firstElementChild.src = 'images/liveHeart.png';    
+        }
         // TODO: Reset Keyboard
-
+        const keyboard = document.getElementById('qwerty');
+        const rows = keyboard.getElementsByTagName('div');
+        console.log(rows);
+        for (let i = 0; i < rows.length; i++) {
+            let keys = rows[i].getElementsByTagName('button');
+            for (let j = 0; j < keys.length; j++) {
+                let key = keys[j];
+                if (key.classList.contains('wrong')) {
+                    key.classList.remove('wrong');
+                } else if (key.classList.contains('chosen')) {
+                    key.classList.remove('chosen');
+                }
+            }
+        }
     }
     /** This will select a random phrase from the phrases */
     getRandomPhrase() {
@@ -57,7 +76,7 @@ class Game {
     handleInteraction(e) {
         //console.log('This =', this); // this is the html e
         
-        if (e.target.matches('button') && !e.target.classList.contains('chosen')) {
+        if (e.target.matches('button') && !e.target.classList.contains('chosen') && !e.target.classList.contains('wrong') ) {
             console.log('Keyboard interaction', e.target.innerHTML);
             game.activePhrase.checkLetter(e.target);
         }
@@ -87,12 +106,8 @@ class Game {
         
         let scoreboard = document.getElementById('scoreboard').firstElementChild;
         let lives = scoreboard.getElementsByTagName('li');
-        // TODO: Need to replace liveHeart.PNG with lostHeart.PNG 
+        // replace liveHeart.PNG with lostHeart.PNG 
         lives[5-game.missed].firstElementChild.src = 'images/lostHeart.png';
-        
-
-
-
         if(game.missed >= 5) {
             game.gameOver('lose');
         }
