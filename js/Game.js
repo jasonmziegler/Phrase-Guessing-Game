@@ -5,7 +5,7 @@
 class Game {
     constructor() {
         this.missed = 0; 
-        this.phrases = ['I love you', 'Eat my shorts', 'Hang loose', 'Cowabunga Dude', 'Fear not'];
+        this.phrases = [new Phrase('I love you'), new Phrase('Eat my shorts'), new Phrase('Hang loose'), new Phrase('Cowabunga Dude'), new Phrase('Fear not')];
         this.activePhrase = null;
     }
 
@@ -43,19 +43,29 @@ class Game {
 
     /** This will select a random phrase from the phrases */
     getRandomPhrase() {
-        return new Phrase(this.phrases[Math.floor(Math.random() * this.phrases.length)]);
+        return this.phrases[Math.floor(Math.random() * this.phrases.length)];
     }
 
     /** This is a description of the foo function. */
     handleInteraction(e) {
         //console.log('This =', this); // this is the html e
-        
-        if (e.target.matches('button') && !e.target.classList.contains('chosen') && !e.target.classList.contains('wrong') ) {
-            //console.log('Keyboard interaction', e.target.innerHTML);
-            game.activePhrase.checkLetter(e.target);
+        let letterButton = e.target;
+        let letter = letterButton.innerHTML;
+        letterButton.setAttribute('disabled', 'disabled');
+        // should disable button when selected so that the && !e.target.classList.contains('chosen') && !e.target.classList.contains('wrong') isn't necessary
+        if (letterButton.matches('button')) {
+            //console.log('Keyboard interaction', letterButton.innerHTML);
+            if (game.activePhrase.checkLetter(letterButton) !== -1) {
+                letterButton.classList.add('chosen');
+                game.activePhrase.showMatchedLetter(letter);
+                if (game.checkForWin()) {
+                    game.gameOver('win');
+                }
+            } else {
+                letterButton.classList.add('wrong');
+                game.removeLife();
+            }
         }
-        
-
     }
 
     /** This will check if all of the letters have been revealed. */

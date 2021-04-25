@@ -46,20 +46,13 @@ class Phrase {
 
  /** This will check if the clicked letter is in the phrase*/
  checkLetter(letterButton) {
-    //console.log('The letter following letter has been checked: ', letterButton);
+    console.log('The letter following letter has been checked: ', letterButton);
     let letter = letterButton.innerHTML;
-    //console.log('Active Phrase', game.activePhrase);
-    //console.log('Index of Letter Chosen', game.activePhrase.phrase.indexOf(letter))
-    if (game.activePhrase.phrase.indexOf(letter) != -1) {
-        letterButton.classList.add('chosen');
-        game.activePhrase.showMatchedLetter(letter);
-        if (game.checkForWin()) {
-            game.gameOver('win');
-        }
-    } else {
-        letterButton.classList.add('wrong');
-        game.removeLife();
-    }
+    console.log('Active Phrase', game.activePhrase);
+    console.log('Index of Letter Chosen', game.activePhrase.phrase.indexOf(letter))
+
+    return (game.activePhrase.phrase.indexOf(letter));
+    
     // <button class="wrong key">q</button>
     // <button class="chosen key">w</button>
     // <button class="key">e</button>
