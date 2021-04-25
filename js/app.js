@@ -6,12 +6,17 @@
 
 const startButton = document.getElementById('btn__reset');
 const keyboard = document.getElementById('qwerty');
-const game = new Game();
-startButton.addEventListener('click', (e) => {
-    
-    game.startGame();
-    keyboard.addEventListener('click', game.handleInteraction);
 
+let game;
+
+startButton.addEventListener('click', (e) => {
+    game = new Game();
+    console.log("***********************NEW GAME************************");
+    game.startGame();
+});
+
+keyboard.addEventListener('click', (e) =>  {        
+    game.handleInteraction(e);
 });
 
 

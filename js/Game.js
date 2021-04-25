@@ -17,7 +17,7 @@ class Game {
         document.getElementById('phrase').innerHTML = '';
         this.activePhrase = this.getRandomPhrase();
         this.activePhrase.addPhraseToDisplay();
-        
+        //console.log('game.startGame() - activePhrase: ',this.activePhrase);   
     }
 
     /** This will select a random phrase from the phrases */
@@ -28,28 +28,34 @@ class Game {
     /** This is a description of the foo function. */
     handleInteraction(e) {
         //console.log('This =', this); // this is the html e
+        //console.log('game.handleInteraction(e) - e: ', e);
         let letterButton = e.target;
         let letter = letterButton.innerHTML;
         letterButton.setAttribute('disabled', 'disabled');
         // should disable button when selected so that the && !e.target.classList.contains('chosen') && !e.target.classList.contains('wrong') isn't necessary
+        let indexOfLetter = this.activePhrase.checkLetter(letter);
+        //console.log('Index of Letter: ', indexOfLetter);
+
         if (letterButton.matches('button')) {
             //console.log('Keyboard interaction', letterButton.innerHTML);
-            if (game.activePhrase.checkLetter(letterButton) !== -1) {
+            if (indexOfLetter !== -1) {
+                //console.log(`The phrase contained ${letter} at index ${indexOfLetter}`);
                 letterButton.classList.add('chosen');
-                game.activePhrase.showMatchedLetter(letter);
-                if (game.checkForWin()) {
-                    game.gameOver('win');
+                this.activePhrase.showMatchedLetter(letter);
+                if (this.checkForWin()) {
+                    this.gameOver('win');
                 }
             } else {
+                //console.log(`The phrase did not contain ${letter}`);
                 letterButton.classList.add('wrong');
-                game.removeLife();
+                this.removeLife();
             }
         }
     }
 
     /** This will check if all of the letters have been revealed. */
     checkForWin() {
-        //console.log('Check for win!');
+        //console.log('Check for win! this: ', this);
         // plan to use the same process for display letter to loop over the letters and see if all contain show class
         let phrase = document.getElementById('phrase').firstChild.getElementsByTagName('li');
         //let win = true;
@@ -59,20 +65,19 @@ class Game {
             }
         }
         return true;
-
     }
 
     /** This will remove a life from the player on screen. */
     removeLife() {
-        //console.log('A life has been lost');
-        game.missed += 1;
+        //console.log('A life has been lost', this);
+        this.missed += 1;
         
         let scoreboard = document.getElementById('scoreboard').firstElementChild;
         let lives = scoreboard.getElementsByTagName('li');
         // replace liveHeart.PNG with lostHeart.PNG 
-        lives[5-game.missed].firstElementChild.src = 'images/lostHeart.png';
-        if(game.missed >= 5) {
-            game.gameOver('lose');
+        lives[5-this.missed].firstElementChild.src = 'images/lostHeart.png';
+        if(this.missed >= 5) {
+            this.gameOver('lose');
         }
     }
 
@@ -81,6 +86,7 @@ class Game {
      * 
     */
     gameOver(message) {
+        //console.log('gameOver - this', this);
         //console.log('game over!', message);
         const overlay = document.getElementById('overlay');
         const gameOverMessage = document.getElementById('game-over-message');
@@ -118,7 +124,8 @@ class Game {
                 key.removeAttribute('disabled');
                 if (key.classList.contains('wrong')) {
                     key.classList.remove('wrong');
-                } else if (key.classList.contains('chosen')) {
+                }
+                if (key.classList.contains('chosen')) {
                     key.classList.remove('chosen');
                 }
             }
