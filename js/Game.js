@@ -17,28 +17,7 @@ class Game {
         document.getElementById('phrase').innerHTML = '';
         this.activePhrase = this.getRandomPhrase();
         this.activePhrase.addPhraseToDisplay();
-        // Reset Lives
-        this.missed = 0;
-        let scoreboard = document.getElementById('scoreboard').firstElementChild;
-        let lives = scoreboard.getElementsByTagName('li');
-        for (let i = 0; i < lives.length; i++) {
-            lives[i].firstElementChild.src = 'images/liveHeart.png';    
-        }
-        // Reset Keyboard
-        const keyboard = document.getElementById('qwerty');
-        const rows = keyboard.getElementsByTagName('div');
-        //console.log(rows);
-        for (let i = 0; i < rows.length; i++) {
-            let keys = rows[i].getElementsByTagName('button');
-            for (let j = 0; j < keys.length; j++) {
-                let key = keys[j];
-                if (key.classList.contains('wrong')) {
-                    key.classList.remove('wrong');
-                } else if (key.classList.contains('chosen')) {
-                    key.classList.remove('chosen');
-                }
-            }
-        }
+        
     }
 
     /** This will select a random phrase from the phrases */
@@ -119,6 +98,30 @@ class Game {
             } 
             overlay.classList.add('lose');
             gameOverMessage.innerText = "Doh! You lose! Click start to try again.";
-        }      
+        }   
+        
+        // Reset Lives
+        this.missed = 0;
+        let scoreboard = document.getElementById('scoreboard').firstElementChild;
+        let lives = scoreboard.getElementsByTagName('li');
+        for (let i = 0; i < lives.length; i++) {
+            lives[i].firstElementChild.src = 'images/liveHeart.png';    
+        }
+        // Reset Keyboard
+        const keyboard = document.getElementById('qwerty');
+        const rows = keyboard.getElementsByTagName('div');
+        //console.log(rows);
+        for (let i = 0; i < rows.length; i++) {
+            let keys = rows[i].getElementsByTagName('button');
+            for (let j = 0; j < keys.length; j++) {
+                let key = keys[j];
+                key.removeAttribute('disabled');
+                if (key.classList.contains('wrong')) {
+                    key.classList.remove('wrong');
+                } else if (key.classList.contains('chosen')) {
+                    key.classList.remove('chosen');
+                }
+            }
+        }
     }
 }
