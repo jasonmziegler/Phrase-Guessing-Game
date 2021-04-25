@@ -11,7 +11,7 @@ let game;
 
 startButton.addEventListener('click', (e) => {
     game = new Game();
-    console.log("***********************NEW GAME************************");
+    //console.log("***********************NEW GAME************************");
     game.startGame();
 });
 

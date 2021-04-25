@@ -25,7 +25,7 @@ class Phrase {
     // </ul>
     const ul = document.createElement('ul');
     //console.log("Phrase: ", this.phrase);
-    console.log('phrase.addPhraseToDisplay() - this.phrase: ', this.phrase);
+    //console.log('phrase.addPhraseToDisplay() - this.phrase: ', this.phrase);
     for (let i = 0; i < this.phrase.length; i++) {
         let li;
         let letter = this.phrase[i];
@@ -47,9 +47,9 @@ class Phrase {
 
  /** This will check if the clicked letter is in the phrase*/
  checkLetter(letter) {
-    console.log('The letter following letter has been checked: ', letter);
-    console.log('Active Phrase', this.phrase); //game.activePhrase
-    console.log('phrase.checkLetter(LetterButton) Index of Letter Chosen', this.phrase.indexOf(letter))
+    //console.log('The letter following letter has been checked: ', letter);
+    //console.log('Active Phrase', this.phrase); //game.activePhrase
+    //console.log('phrase.checkLetter(LetterButton) Index of Letter Chosen', this.phrase.indexOf(letter))
     return (this.phrase.indexOf(letter));
     // console.log('Active Phrase', game.activePhrase); 
     // console.log('Index of Letter Chosen', game.activePhrase.phrase.indexOf(letter))
